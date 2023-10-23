@@ -20,27 +20,23 @@ const index = ({ changeState }: any) => {
       });
     }
 
-    if (splitData.length > 5) {
-      Swal.fire({
-        title: "กรอกรายการได้สูงสุด 5 รายการ",
-        icon: "error",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+    // if (splitData.length > 5) {
+    //   Swal.fire({
+    //     title: "กรอกรายการได้สูงสุด 5 รายการ",
+    //     icon: "error",
+    //     showConfirmButton: false,
+    //     timer: 2000,
+    //   });
+    // }
+
+    // console.log(splitData);
+
+    const Course_N: any = {};
+    for (let i = 1; i < splitData.length; i++) {
+      Course_N[`Course_N${i}`] = splitData[i - 1];
     }
 
-    switch (splitData.length) {
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-    }
+    console.log(Course_N);
   };
 
   return (
@@ -56,7 +52,7 @@ const index = ({ changeState }: any) => {
           <p className="absolute text-white font-extralight tracking-widest spacing border-b border-white top-1/2 translate-x-1/2 translate-y-1/2 right-1/2 text-4xl duration-200 max-md:text-2xl max-[500px]:text-xl ">
             เทียบโอนหลักสูตร
           </p>
-          <div className="bg-white absolute z-10 p-3 xl:w-1/3 shadow-2xl bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 shadow-gray-600 max-xl:w-11/12 duration-200 max-[500px]:my-5 max-md:text-sm ">
+          <div className="bg-white absolute z-10 p-3 xl:w-1/3 shadow-md bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 shadow-gray-600 max-xl:w-11/12 duration-200 max-[500px]:my-5 max-md:text-sm ">
             <div>
               <p className="font-light ">
                 กรุณากรอกรหัสวิชาสำหรับตรวจสอบการเทียบโอน
