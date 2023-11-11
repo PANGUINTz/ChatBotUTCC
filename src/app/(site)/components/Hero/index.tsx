@@ -6,7 +6,6 @@ import HeroImage from "../../../../assets/images/hero_image.png";
 
 const index = ({ changeState }: any) => {
   const [formData, setFormData] = useState("");
-  // console.log(formData);
 
   const handleSubmit = () => {
     const splitData = formData.split(",");
@@ -19,18 +18,6 @@ const index = ({ changeState }: any) => {
         timer: 2000,
       });
     }
-
-    // if (splitData.length > 5) {
-    //   Swal.fire({
-    //     title: "กรอกรายการได้สูงสุด 5 รายการ",
-    //     icon: "error",
-    //     showConfirmButton: false,
-    //     timer: 2000,
-    //   });
-    // }
-
-    // console.log(splitData);
-
     const Course_N: any = {};
     for (let i = 1; i < splitData.length; i++) {
       Course_N[`Course_N${i}`] = splitData[i - 1];
@@ -67,15 +54,13 @@ const index = ({ changeState }: any) => {
                 onChange={(e) => setFormData(e.target.value)}
               />
               <button
-                className="bg-green-500 py-2 px-5 text-white hover:bg-green-900 duration-300 rounded-lg h-fit mt-2"
+                className="bg-green-700 py-2 px-5 text-white hover:bg-green-900 duration-300 rounded-lg h-fit mt-2"
                 onClick={handleSubmit}
               >
                 ยืนยัน
               </button>
             </div>
-            <p className="text-red-500">
-              *กรุณากรอกรหัสวิชาให้ถูกต้อง และสามารถใส่ได้สูงสุด 5 รหัสวิชา
-            </p>
+            <p className="text-red-500">*กรุณากรอกรหัสวิชาให้ถูกต้อง</p>
           </div>
         </div>
       ) : (

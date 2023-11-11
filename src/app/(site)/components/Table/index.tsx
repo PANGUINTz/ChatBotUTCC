@@ -34,16 +34,76 @@ const index = ({ changeState }: any) => {
     {
       Accept: [
         {
-          Course_C: "30204-2001",
-          Course_N: "พื้นฐานธุรกิจ",
-          NCourse_C: "GE_104",
-          NCourse_N: "ธุรกิจออนไลน์",
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
         },
         {
-          Course_C: "30204-2002",
-          Course_N: "พื้นฐานธุรกิจ",
-          NCourse_C: "GE_105",
-          NCourse_N: "อะไรวะ",
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
+        },
+        {
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
+        },
+        {
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
+        },
+        {
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
+        },
+        {
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
+        },
+        {
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
+        },
+        {
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
+        },
+        {
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
+        },
+        {
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
+        },
+        {
+          Course_C: "30000-1201",
+          Course_N: "ภาษาอังกฤษเพื่อการสื่อสาร",
+          NCourse_C: "GE071",
+          NCourse_N: "ภาษาอังกฤษเพื่อการสื่อสารในชีวิตประจำวัน",
+        },
+        {
+          Course_C: "30204-2004",
+          Course_N: "หลักการคิดเชิงออกแบบและนวัตกรรมธุรกิจดิจิทัล",
+          NCourse_C: "GE154",
+          NCourse_N: "การคิดเชิงนวัตกรรมทางดิจิทัลเพื่อธุรกิจ",
         },
       ],
       Repeat: [
@@ -60,6 +120,48 @@ const index = ({ changeState }: any) => {
   return (
     <div className="container mx-auto my-20">
       {changeState && (
+        <table className="text-white w-full text-left">
+          <tbody>
+            <tr className="bg-black">
+              <th colSpan={4} className="p-5 text-center">
+                หมวดวิชาศึกษาทั่วไป
+              </th>
+            </tr>
+            <tr>
+              <th className="p-5 bg-green-700">รหัสวิชา-ชื่อวิชา</th>
+              <th className="p-5  bg-green-700 text-center">หน่วยกิต</th>
+              <th className="p-5 bg-blue-900">
+                รหัสวิชา-ชื่อวิชา (วิชาที่เทียบหน่วยกิตได้)
+              </th>
+              <th className="p-5 bg-blue-900 text-center">หน่วยกิต</th>
+            </tr>
+            {datas[0].Accept.map((data, k) => (
+              <tr
+                className="border-b border-gray-500 bg-white text-black"
+                key={k}
+              >
+                <td className="p-5">
+                  <p>
+                    {data?.Course_C} {data?.Course_N}
+                  </p>
+                  <p>
+                    {data?.Course_C} {data?.Course_N}
+                  </p>
+                </td>
+                <td className="p-5 text-center border-r-4">
+                  <p>3</p>
+                  <p>3</p>
+                </td>
+                <td className="p-5">
+                  {data?.NCourse_C} {data?.NCourse_N}
+                </td>
+                <td className="p-5 text-center">3</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {/* {changeState && (
         <Table aria-label="Example table with dynamic content">
           <TableHeader columns={columns}>
             {(column) => (
@@ -84,17 +186,17 @@ const index = ({ changeState }: any) => {
                   <TableCell className="p-5">
                     {v.Course_C} {v.Course_N}
                   </TableCell>
-                  <TableCell className="p-5">3</TableCell>
+                  <TableCell className="p-5 text-center">3</TableCell>
                   <TableCell className="p-5">
                     {v.NCourse_C} {v.NCourse_N}
                   </TableCell>
-                  <TableCell className="p-5">3</TableCell>
+                  <TableCell className="p-5 text-center">3</TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
-      )}
+      )} */}
     </div>
   );
 };

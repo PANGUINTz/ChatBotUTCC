@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -8,13 +9,42 @@ const Footer = () => {
           <div>
             <h4>Quick Links</h4>
             <div className="grid grid-cols-2 max-md:grid-cols-3 gap-1 list-none my-2 font-light">
-              <li>สมัครเรียน</li>
-              <li>เกี่ยวกับคณะ</li>
-              <li>หลักสูตร</li>
-
-              <li>อบรมและบริการ</li>
-              <li>ศิษย์เก่า</li>
-              <li>ศิษย์ปัจจุบัน</li>
+              <Link
+                href={"https://www.utcc.ac.th/admission/"}
+                className="w-fit max-md:w-full"
+              >
+                สมัครเรียน
+              </Link>
+              <Link
+                href={"https://science.utcc.ac.th/about-us/"}
+                className="w-fit max-md:w-full"
+              >
+                เกี่ยวกับคณะ
+              </Link>
+              <Link
+                href={"https://science.utcc.ac.th/course_bachelor/"}
+                className="w-fit max-md:w-full"
+              >
+                หลักสูตร
+              </Link>
+              <Link
+                href={"https://www.utcc.ac.th/personnel/"}
+                className="w-fit max-md:w-full"
+              >
+                บุคลากร
+              </Link>
+              <Link
+                href={"https://science.utcc.ac.th/alumni/"}
+                className="w-fit max-md:w-full"
+              >
+                ศิษย์เก่า
+              </Link>
+              <Link
+                href={"https://science.utcc.ac.th/students/"}
+                className="w-fit max-md:w-full"
+              >
+                ศิษย์ปัจจุบัน
+              </Link>
             </div>
           </div>
           <div>
