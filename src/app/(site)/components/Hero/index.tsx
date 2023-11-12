@@ -39,7 +39,7 @@ const index = ({ changeState }: any) => {
           <p className="absolute text-white font-extralight tracking-widest spacing border-b border-white top-1/2 translate-x-1/2 translate-y-1/2 right-1/2 text-4xl duration-200 max-md:text-2xl max-[500px]:text-xl ">
             เทียบโอนหลักสูตร
           </p>
-          <div className="bg-white absolute z-10 p-3 xl:w-1/3 shadow-md bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 shadow-gray-600 max-xl:w-11/12 duration-200 max-[500px]:my-5 max-md:text-sm ">
+          <div className="bg-white absolute z-10 px-6 py-4 xl:w-1/3 shadow-md bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 shadow-gray-600 max-xl:w-11/12 duration-200 max-[500px]:my-5 max-md:text-sm ">
             <div>
               <p className="font-light ">
                 กรุณากรอกรหัสวิชาสำหรับตรวจสอบการเทียบโอน

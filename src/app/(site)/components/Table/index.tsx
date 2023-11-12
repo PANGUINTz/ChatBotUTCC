@@ -120,20 +120,17 @@ const index = ({ changeState }: any) => {
   return (
     <div className="container mx-auto my-20">
       {changeState && (
+
         <table className="text-white w-full text-left">
+                  <h3 className="text-black mb-3 mt-5">หมวดวิชาศึกษาทั่วไป</h3>
           <tbody>
-            <tr className="bg-black">
-              <th colSpan={4} className="p-5 text-center">
-                หมวดวิชาศึกษาทั่วไป
-              </th>
-            </tr>
             <tr>
               <th className="p-5 bg-green-700">รหัสวิชา-ชื่อวิชา</th>
               <th className="p-5  bg-green-700 text-center">หน่วยกิต</th>
-              <th className="p-5 bg-blue-900">
+              <th className="p-5 bg-gray-800">
                 รหัสวิชา-ชื่อวิชา (วิชาที่เทียบหน่วยกิตได้)
               </th>
-              <th className="p-5 bg-blue-900 text-center">หน่วยกิต</th>
+              <th className="p-5 bg-gray-800 text-center">หน่วยกิต</th>
             </tr>
             {datas[0].Accept.map((data, k) => (
               <tr
