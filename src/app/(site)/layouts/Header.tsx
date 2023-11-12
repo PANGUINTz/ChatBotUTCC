@@ -5,6 +5,7 @@ import Hamburger from "hamburger-react";
 import { useState, useEffect } from "react";
 
 import Logo from "../../../assets/images/logo_utcc.png";
+import Link from "next/link";
 
 const Header = ({ handleChange, changeState }: any) => {
   const [isOpen, setOpen] = useState(false);
@@ -28,7 +29,14 @@ const Header = ({ handleChange, changeState }: any) => {
       <div className="bg-white py-5 max-md:px-5 fixed w-screen z-30">
         <div className="container mx-auto">
           <div className="flex justify-between">
-            <Image src={Logo} alt="Logo" className="cursor-pointer object-contain" />
+            <Link href={"https://www.utcc.ac.th/"}>
+              <Image
+                src={Logo}
+                alt="Logo"
+                className="cursor-pointer object-contain"
+              />
+            </Link>
+
             <div className="flex max-md:hidden">
               <li
                 className={`list-none mx-5 border-b-2 hover:text-lime-600 duration-150  max-md:text-sm cursor-pointer ${

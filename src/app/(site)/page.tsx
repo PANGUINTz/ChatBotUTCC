@@ -6,10 +6,14 @@ import MainLayouts from "./layouts/MainLayouts";
 
 export default function Home() {
   const [changeState, setChangeState] = useState<boolean>(true);
+  const [compareDataInitial, setcompareDataInitial] = useState([]);
 
   const handleChangeState = (value: boolean) => {
     return setChangeState(value);
   };
+
+  console.log(compareDataInitial);
+
   usePreventZoom();
   return (
     <div>
@@ -17,8 +21,23 @@ export default function Home() {
         handleChangeState={handleChangeState}
         changeState={changeState}
       >
-        <Hero changeState={changeState} />
-        <Subject changeState={changeState} />
+        <Hero
+          changeState={changeState}
+          saveData={setcompareDataInitial}
+          initialData={compareDataInitial}
+        />
+        <Subject
+          changeState={changeState}
+          initialData={compareDataInitial?.general}
+          title={"หมวดวิชาศึกษาทั่วไป"}
+          dupicate={compareDataInitial?.dupicate}
+        />
+
+        <Subject
+          changeState={changeState}
+          initialData={compareDataInitial?.notCompare}
+          title={"รายวิชาที่ไม่สามารถเทียบโอนได้"}
+        />
       </MainLayouts>
     </div>
   );

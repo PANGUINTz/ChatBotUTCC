@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import HeroImage from "../../../../assets/images/hero_image.png";
+import { compareSubject } from "../../../service/subjectCompare";
+import axios from "axios";
 
-const index = ({ changeState }: any) => {
+const index = ({ changeState, saveData, initialData }: any) => {
   const [formData, setFormData] = useState("");
 
-  const handleSubmit = () => {
-    const splitData = formData.split(",");
+  const handleSubmit = async () => {
+    const splitData = formData.split(/[,\s]+/);
 
     if (splitData[0] === "") {
       Swal.fire({
@@ -17,13 +19,24 @@ const index = ({ changeState }: any) => {
         showConfirmButton: false,
         timer: 2000,
       });
-    }
-    const Course_N: any = {};
-    for (let i = 1; i < splitData.length; i++) {
-      Course_N[`Course_N${i}`] = splitData[i - 1];
-    }
+    } else {
+      const course_N: any = {};
+      for (let i = 0; i < splitData.length; i++) {
+        course_N[`course_N${i + 1}`] = splitData[i];
+      }
+      const data = await compareSubject(course_N);
 
-    console.log(Course_N);
+      if (initialData.length === 0) {
+        saveData(data);
+      } else {
+        const mergedData = {
+          general: initialData?.general?.concat(data.general),
+          duplicate: initialData?.duplicate?.concat(data.duplicate),
+          notCompare: initialData?.notCompare?.concat(data.notCompare),
+        };
+        saveData(mergedData);
+      }
+    }
   };
 
   return (
