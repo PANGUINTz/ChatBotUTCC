@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Hero from "./components/Hero";
 import Subject from "./components/Table";
 import MainLayouts from "./layouts/MainLayouts";
+import Condition from "./components/Condition";
 
 export default function Home() {
   const [changeState, setChangeState] = useState<boolean>(true);
@@ -27,7 +28,7 @@ export default function Home() {
         <Subject
           changeState={changeState}
           initialData={compareDataInitial?.general}
-          title={"หมวดวิชาศึกษาทั่วไป"}
+          title={"วิชาที่สามารถเทียบโอนได้"}
           dupicate={compareDataInitial?.dupicate}
         />
 
@@ -36,6 +37,8 @@ export default function Home() {
           initialData={compareDataInitial?.notCompare}
           title={"รายวิชาที่ไม่สามารถเทียบโอนได้"}
         />
+
+        <Condition changeState={!changeState} />
       </MainLayouts>
     </div>
   );

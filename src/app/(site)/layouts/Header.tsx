@@ -52,7 +52,7 @@ const Header = ({ handleChange, changeState }: any) => {
                 }`}
                 onClick={() => handleChange(false)}
               >
-                ประวัติการเทียบโอน
+                เงื่อนไขการเทียบโอน
               </li>
             </div>
 
@@ -85,7 +85,7 @@ const Header = ({ handleChange, changeState }: any) => {
             }`}
             onClick={() => handleChange(false)}
           >
-            ประวัติการเทียบโอน
+            เงื่อนไชการเทียบโอน
           </li>
         </div>
       </div>

@@ -76,7 +76,7 @@ const index = ({ changeState, saveData, initialData }: any) => {
         </div>
       ) : (
         <p className="absolute text-white font-extralight tracking-widest spacing border-b border-white top-1/2 translate-x-1/2 translate-y-1/2 right-1/2 text-4xl duration-200 max-md:text-2xl max-[500px]:text-xl ">
-          ประวัติการเทียบโอน
+          เงื่อนไขการเทียบโอน
         </p>
       )}
     </div>
