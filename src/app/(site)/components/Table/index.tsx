@@ -65,7 +65,7 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
                   >
                     {Object.keys(dupicateValue).map((convertCode) => (
                       <>
-                        <td key={convertCode} className="p-5">
+                        <td className="p-5">
                           {dupicateValue[convertCode].map((item: any) => (
                             <p>
                               {item.course_code} {item.course_name}
@@ -73,7 +73,6 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
                           ))}
                         </td>
                         <td
-                          key={convertCode}
                           className="p-5 text-center border-r-4"
                         >
                           {dupicateValue[convertCode].map((item: any) => (
@@ -82,12 +81,12 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
                         </td>
                         <td className="p-5">
                           <p>
-                            {dupicateValue[convertCode][0].course_code}&nbsp;
-                            {dupicateValue[convertCode][0].course_name}
+                            {dupicateValue[convertCode][0].convert_code}&nbsp;
+                            {dupicateValue[convertCode][0].convert_name}
                           </p>
                         </td>
                         <td className="p-5 text-center border-r-4">
-                          {dupicateValue[convertCode][0].course_credit}
+                          {dupicateValue[convertCode][0].convert_credit}
                         </td>
                       </>
                     ))}
