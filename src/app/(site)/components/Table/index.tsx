@@ -41,6 +41,7 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
                       <td className="p-5 text-center border-r-4">
                         <p>{data?.course_credit}</p>
                       </td>
+<<<<<<< HEAD
                       {title === "รายวิชาที่ไม่สามารถเทียบโอนได้" ? (
                         <td className="p-5">
                           {data?.desc
@@ -70,6 +71,46 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
                         ไม่มีข้อมูล
                       </div>
                     </td>
+=======
+                    </>
+                  )}
+                </tr>
+              ))}
+
+              {dupicate ? (
+                dupicate.map((dupicateValue: any, index: number) => (
+                  <tr
+                    key={Object.keys(dupicateValue)[index]}
+                    className="border-b border-gray-500 bg-white text-black"
+                  >
+                    {Object.keys(dupicateValue).map((convertCode) => (
+                      <>
+                        <td className="p-5">
+                          {dupicateValue[convertCode].map((item: any) => (
+                            <p>
+                              {item.course_code} {item.course_name}
+                            </p>
+                          ))}
+                        </td>
+                        <td
+                          className="p-5 text-center border-r-4"
+                        >
+                          {dupicateValue[convertCode].map((item: any) => (
+                            <p>{item.course_credit}</p>
+                          ))}
+                        </td>
+                        <td className="p-5">
+                          <p>
+                            {dupicateValue[convertCode][0].convert_code}&nbsp;
+                            {dupicateValue[convertCode][0].convert_name}
+                          </p>
+                        </td>
+                        <td className="p-5 text-center border-r-4">
+                          {dupicateValue[convertCode][0].convert_credit}
+                        </td>
+                      </>
+                    ))}
+>>>>>>> 495b9d9a65f7daae8d0b8bd54840b0b42f109df1
                   </tr>
                 )}
 
