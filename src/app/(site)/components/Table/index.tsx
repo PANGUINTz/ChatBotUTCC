@@ -1,7 +1,7 @@
 import React from "react";
-const index = ({ changeState, initialData, title }: any) => {
-  initialData?.general?.map((v: any, k: number) => console.log(v));
-
+import Image from "next/image";
+import Search from "@/assets/images/search.png";
+const index = ({ changeState, initialData, title, dupicate }: any) => {
   return (
     <div className="container mx-auto my-20">
       {changeState && (
@@ -56,6 +56,53 @@ const index = ({ changeState, initialData, title }: any) => {
                   )}
                 </tr>
               ))}
+
+              {dupicate ? (
+                dupicate.map((dupicateValue: any, index: number) => (
+                  <tr
+                    key={Object.keys(dupicateValue)[index]}
+                    className="border-b border-gray-500 bg-white text-black"
+                  >
+                    {Object.keys(dupicateValue).map((convertCode) => (
+                      <>
+                        <td key={convertCode} className="p-5">
+                          {dupicateValue[convertCode].map((item: any) => (
+                            <p>
+                              {item.course_code} {item.course_name}
+                            </p>
+                          ))}
+                        </td>
+                        <td
+                          key={convertCode}
+                          className="p-5 text-center border-r-4"
+                        >
+                          {dupicateValue[convertCode].map((item: any) => (
+                            <p>{item.course_credit}</p>
+                          ))}
+                        </td>
+                        <td className="p-5">
+                          <p>
+                            {dupicateValue[convertCode][0].course_code}&nbsp;
+                            {dupicateValue[convertCode][0].course_name}
+                          </p>
+                        </td>
+                        <td className="p-5 text-center border-r-4">
+                          {dupicateValue[convertCode][0].course_credit}
+                        </td>
+                      </>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr className="">
+                  <td className="text-black" colSpan={4}>
+                    <div className="flex flex-col items-center p-2.5">
+                      <Image src={Search} alt={"search"} width={70} />
+                      ไม่มีข้อมูล
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

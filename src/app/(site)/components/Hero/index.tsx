@@ -4,11 +4,9 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import HeroImage from "../../../../assets/images/hero_image.png";
 import { compareSubject } from "../../../service/subjectCompare";
-import axios from "axios";
 
 const index = ({ changeState, saveData, initialData }: any) => {
   const [formData, setFormData] = useState("");
-
   const handleSubmit = async () => {
     const splitData = formData.split(/[,\s]+/);
 
@@ -31,7 +29,7 @@ const index = ({ changeState, saveData, initialData }: any) => {
       } else {
         const mergedData = {
           general: initialData?.general?.concat(data.general),
-          duplicate: initialData?.duplicate?.concat(data.duplicate),
+          dupicate: initialData?.dupicate?.concat(data.dupicate),
           notCompare: initialData?.notCompare?.concat(data.notCompare),
         };
         saveData(mergedData);
