@@ -26,13 +26,22 @@ const index = ({ changeState, saveData, initialData }: any) => {
 
       if (initialData.length === 0) {
         saveData(data);
-      } else {
-        const mergedData = {
-          general: initialData?.general?.concat(data.general),
-          dupicate: initialData?.dupicate?.concat(data.dupicate),
-          notCompare: initialData?.notCompare?.concat(data.notCompare),
-        };
-        saveData(mergedData);
+      } else if (data.general[0]!=null) {
+        let duplicate = 0; //duplicate state
+        for (let i = 0; i < initialData.general.length; i++) {
+          if (initialData.general[i]._id === data.general[0]._id) {
+            duplicate = 1;
+            break;
+          }
+        }
+        if (duplicate !== 1) {
+          const mergedData = {
+            general: initialData.general.concat(data.general),
+            duplicate: initialData.dupicate?.concat(data.dupicate),
+            notCompare: initialData.notCompare?.concat(data.notCompare),
+          };
+          saveData(mergedData);
+        }
       }
     }
   };
