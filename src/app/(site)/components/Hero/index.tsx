@@ -42,6 +42,14 @@ const index = ({ changeState, saveData, initialData }: any) => {
           };
           saveData(mergedData);
         }
+      }else{
+        const mergedData = {
+          general: initialData.general.concat(data.general),
+          duplicate: initialData.dupicate?.concat(data.dupicate),
+          notCompare: initialData.notCompare?.concat(data.notCompare),
+        };
+        saveData(mergedData);
+
       }
     }
   };
