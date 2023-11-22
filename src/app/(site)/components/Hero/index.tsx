@@ -26,30 +26,56 @@ const index = ({ changeState, saveData, initialData }: any) => {
 
       if (initialData.length === 0) {
         saveData(data);
-      } else if (data.general[0]!=null) {
-        let duplicate = 0; //duplicate state
-        for (let i = 0; i < initialData.general.length; i++) {
-          if (initialData.general[i]._id === data.general[0]._id) {
-            duplicate = 1;
-            break;
+      } else if (
+        (data.general.length == 1 && data.dupicate.length == 1) ||
+        (data.notCompare.length == 1 && data.dupicate.length == 1)
+      ) {
+        console.log("one");
+        if (data.general[0] != null) {
+          console.log("general");
+          let check = 0; //duplicate state
+          for (let i = 0; i < initialData.general.length; i++) {
+            if (
+              initialData.general[i].course_code == data.general[0].course_code
+            ) {
+              check = 1;
+              break;
+            }
+          }
+          if (check == 0) {
+            const mergedData = {
+              general: initialData.general.concat(data.general),
+              duplicate: initialData.dupicate?.concat(data.dupicate),
+              notCompare: initialData.notCompare?.concat(data.notCompare),
+            };
+            saveData(mergedData);
+          }
+        } else if (data.notCompare[0] != null) {
+          console.log("notCompair");
+          let check = 0; //duplicate state
+          for (let i = 0; i < initialData.notCompare.length; i++) {
+            if (
+              initialData.notCompare[i].course_code ==
+              data.notCompare[0].course_code
+            ) {
+              check = 1;
+              break;
+            }
+          }
+          if (check == 0) {
+            const mergedData = {
+              general: initialData.general.concat(data.general),
+              duplicate: initialData.dupicate?.concat(data.dupicate),
+              notCompare: initialData.notCompare?.concat(data.notCompare),
+            };
+            saveData(mergedData);
           }
         }
-        if (duplicate !== 1) {
-          const mergedData = {
-            general: initialData.general.concat(data.general),
-            duplicate: initialData.dupicate?.concat(data.dupicate),
-            notCompare: initialData.notCompare?.concat(data.notCompare),
-          };
-          saveData(mergedData);
-        }
-      }else{
-        const mergedData = {
-          general: initialData.general.concat(data.general),
-          duplicate: initialData.dupicate?.concat(data.dupicate),
-          notCompare: initialData.notCompare?.concat(data.notCompare),
-        };
-        saveData(mergedData);
-
+      } else {
+        console.log("many");
+        
+        const newObject = Object.keys(data.dupicate[0]); //get course code duplicate
+        console.log(data.dupicate[0][newObject[0]][0].course_code);
       }
     }
   };
