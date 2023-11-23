@@ -24,12 +24,83 @@ const index = ({ changeState, saveData, initialData }: any) => {
       }
       const data = await compareSubject(course_N);
 
+      const getCourse = Object.keys(data.dupicate[0]); //get object course
+      console.log(data.dupicate[0][getCourse[0]]);
+      //console.log(data.dupicate[0][getCourse[0]][0].course_code)
+
       if (initialData.length === 0) {
-        saveData(data);
-      } else if (
-        (data.general.length == 1 && data.dupicate.length == 1) ||
-        (data.notCompare.length == 1 && data.dupicate.length == 1)
-      ) {
+        let validate = 0;
+        if (data.general.length > 1) {
+          for (let i = 0; i < data.general.length; i++) {
+            for (let j = 0; j < data.general.length; j++) {
+              if (data.general[i].course_code == data.general[j].course_code) {
+                validate == 1;
+                console.log("err1");
+                break;
+              }
+            }
+          }
+        }
+        if (data.notCompare.length > 1) {
+          for (let i = 0; i < data.notCompare.length; i++) {
+            for (let j = 0; j < data.notCompare.length; j++) {
+              if (
+                data.notCompare[i].course_code == data.notCompare[j].course_code
+              ) {
+                validate == 1;
+                console.log("err2");
+                break;
+              }
+            }
+          }
+        }
+        if (
+          Array.isArray(data.dupicate[0][getCourse[0]]) &&
+          data.dupicate[0][getCourse[0]] != null
+        ) {
+          for (let i = 0; i < data.dupicate[0][getCourse[0]].length; i++) {
+            for (let j = 0; j < data.dupicate[0][getCourse[0]].length; j++) {
+              for (let k = 0; k < data.dupicate[0][getCourse[0]].length; k++) {
+                if (
+                  data.dupicate[0][getCourse[i]][j].course_code ==
+                  data.dupicate[0][getCourse[i]][k].course_code
+                ) {
+                  if (data.general.length > 1) {
+                    for (let i = 0; i < data.general.length; i++) {
+                      for (let j = 0; j < data.general.length; j++) {
+                        if (
+                          data.general[i].course_code ==
+                          data.general[j].course_code
+                        ) {
+                        }
+                      }
+                    }
+                    if (data.notCompare.length > 1) {
+                      for (let i = 0; i < data.notCompare.length; i++) {
+                        for (let j = 0; j < data.notCompare.length; j++) {
+                          if (
+                            data.notCompare[i].course_code ==
+                            data.notCompare[j].course_code
+                          ) {
+                            validate == 3;
+                            console.log("err3");
+                            break;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (validate != 1) {
+          saveData(data);
+          console.log(data);
+        }
+      } else if (getCourse.length == 0) {
+        console.log(data);
         console.log("one");
         if (data.general[0] != null) {
           console.log("general");
@@ -73,9 +144,79 @@ const index = ({ changeState, saveData, initialData }: any) => {
         }
       } else {
         console.log("many");
-        
-        const newObject = Object.keys(data.dupicate[0]); //get course code duplicate
-        console.log(data.dupicate[0][newObject[0]][0].course_code);
+        console.log(data);
+        let validate = 0;
+        if (data.general.length > 1) {
+          for (let i = 0; i < data.general.length; i++) {
+            for (let j = 0; j < data.general.length; j++) {
+              if (data.general[i].course_code == data.general[j].course_code) {
+                validate == 1;
+                console.log("err1");
+                break;
+              }
+            }
+          }
+        }
+        if (data.notCompare.length > 1) {
+          for (let i = 0; i < data.notCompare.length; i++) {
+            for (let j = 0; j < data.notCompare.length; j++) {
+              if (
+                data.notCompare[i].course_code == data.notCompare[j].course_code
+              ) {
+                validate == 1;
+                console.log("err2");
+                break;
+              }
+            }
+          }
+        }
+        if (Array.isArray(data.dupicate[0][getCourse[0]])) {
+          for (let i = 0; i < data.dupicate.length; i++) {
+            console.log();
+          }
+          for (let i = 0; i < data.dupicate[0][getCourse[0]].length; i++) {
+            for (let j = 0; j < data.dupicate[0][getCourse[0]].length; j++) {
+              for (let k = 0; k < data.dupicate[0][getCourse[0]].length; k++) {
+                if (data.dupicate[0][getCourse[0]] != null) {
+                  if (
+                    data.dupicate[0][getCourse[i]][j].course_code ==
+                    data.dupicate[0][getCourse[i]][k].course_code
+                  ) {
+                    if (data.general.length > 1) {
+                      for (let i = 0; i < data.general.length; i++) {
+                        for (let j = 0; j < data.general.length; j++) {
+                          if (
+                            data.general[i].course_code ==
+                            data.general[j].course_code
+                          ) {
+                          }
+                        }
+                      }
+                      if (data.notCompare.length > 1) {
+                        for (let i = 0; i < data.notCompare.length; i++) {
+                          for (let j = 0; j < data.notCompare.length; j++) {
+                            if (
+                              data.notCompare[i].course_code ==
+                              data.notCompare[j].course_code
+                            ) {
+                              validate == 3;
+                              console.log("err3");
+                              break;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (validate != 1) {
+          saveData(data);
+          console.log(data);
+        }
       }
     }
   };

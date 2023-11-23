@@ -75,43 +75,43 @@ const index = ({ changeState, initialData, title, dupicate }: any) => {
 
                 {dupicate &&
                   dupicate.map((dupicateValue: any, index: number) => (
-                    <tr
-                      key={index}
-                      className="border-b border-gray-500 bg-white text-black"
-                    >
+                    <>
                       {Object.keys(dupicateValue).map((convertCode) => (
                         <>
-                          <td className="p-5">
-                            {dupicateValue[convertCode].map(
-                              (item: any, number: number) => (
-                                <p key={number}>
-                                  {item.course_code} {item.course_name}
-                                </p>
-                              )
-                            )}
-                          </td>
-                          <td className="p-5 text-center border-r-4">
-                            {dupicateValue[convertCode].map(
-                              (item: any, number: number) => (
-                                <p key={number}>{item.course_credit}</p>
-                              )
-                            )}
-                          </td>
-                          <td className="p-5">
-                            <p>
-                              {dupicateValue[convertCode][0].convert_code}&nbsp;
-                              {dupicateValue[convertCode][0].convert_name}
-                            </p>
-                          </td>
-                          <td className="p-5 text-center">
-                            {dupicateValue[convertCode][0].convert_credit}
-                          </td>
-                          <td className="p-5 text-center">
-                            {dupicateValue[convertCode][0].category}
-                          </td>
+                          <tr className="border-b border-gray-500 bg-white text-black">
+                            <td className="p-5">
+                              {dupicateValue[convertCode].map(
+                                (item: any, number: number) => (
+                                  <p key={number}>
+                                    {item.course_code} {item.course_name}
+                                  </p>
+                                )
+                              )}
+                            </td>
+                            <td className="p-5 text-center border-r-4">
+                              {dupicateValue[convertCode].map(
+                                (item: any, number: number) => (
+                                  <p key={number}>{item.course_credit}</p>
+                                )
+                              )}
+                            </td>
+                            <td className="p-5">
+                              <p>
+                                {dupicateValue[convertCode][0].convert_code}
+                                &nbsp;
+                                {dupicateValue[convertCode][0].convert_name}
+                              </p>
+                            </td>
+                            <td className="p-5 text-center">
+                              {dupicateValue[convertCode][0].convert_credit}
+                            </td>
+                            <td className="p-5 text-center">
+                              {dupicateValue[convertCode][0].category}
+                            </td>
+                          </tr>
                         </>
                       ))}
-                    </tr>
+                    </>
                   ))}
               </tbody>
             </table>
