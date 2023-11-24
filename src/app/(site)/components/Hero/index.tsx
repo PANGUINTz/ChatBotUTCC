@@ -9,7 +9,6 @@ const index = ({ changeState, saveData, initialData }: any) => {
   const [formData, setFormData] = useState("");
   const handleSubmit = async () => {
     const splitData = formData.split(/[,\s]+/);
-
     if (splitData[0] === "") {
       Swal.fire({
         title: "กรุณากรอกรหัสวิชาเพื่อตรวจสอบ",
@@ -45,7 +44,7 @@ const index = ({ changeState, saveData, initialData }: any) => {
             }
           }
         }
-        if (
+        else if (
           Array.isArray(data.dupicate[0][getCourse[0]]) &&
           data.dupicate[0][getCourse[0]] != null
         ) {
@@ -86,6 +85,22 @@ const index = ({ changeState, saveData, initialData }: any) => {
             ) {
               validate = 1;
               break;
+            }
+          }
+        } else if (
+          Array.isArray(data.dupicate[0][getCourse[0]]) &&
+          data.dupicate[0][getCourse[0]] != null
+        ) {
+          for (let i = 0; i < data.dupicate[0][getCourse[0]].length; i++) {
+            for (let j = 0; j < data.dupicate[0][getCourse[0]].length; j++) {
+              if (
+                data.dupicate[0][getCourse[0]][i].course_code ==
+                  data.dupicate[0][getCourse[0]][j].course_code &&
+                i != j
+              ) {
+                validate = 1;
+                break;
+              }
             }
           }
         }
