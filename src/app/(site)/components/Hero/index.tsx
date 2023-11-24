@@ -9,6 +9,8 @@ const index = ({ changeState, saveData, initialData }: any) => {
   const [formData, setFormData] = useState("");
   const handleSubmit = async () => {
     const splitData = formData.split(/[,\s]+/);
+    console.log(initialData);
+
     if (splitData[0] === "") {
       Swal.fire({
         title: "กรุณากรอกรหัสวิชาเพื่อตรวจสอบ",
@@ -21,110 +23,119 @@ const index = ({ changeState, saveData, initialData }: any) => {
       for (let i = 0; i < splitData.length; i++) {
         course_N[`course_N${i + 1}`] = splitData[i];
       }
-      const data = await compareSubject(course_N);
-
-      const getCourse = Object.keys(data.dupicate[0]); //get object course
-      console.log(data);
-      console.log(data.dupicate[0][getCourse[0]]);
-      //console.log(data.dupicate[0][getCourse[0]][0].course_code)
 
       if (initialData.length === 0) {
+        // when no have old data
         let validate = 0;
-        if (data.notCompare.length > 0) {
-          for (let i = 0; i < data.notCompare.length; i++) {
-            for (let j = 0; j < data.notCompare.length; j++) {
-              if (
-                data.notCompare[i].course_code ==
-                  data.notCompare[j].course_code &&
-                i != j
-              ) {
-                validate = 1;
-                break;
-              }
-            }
-          }
-        }
-        else if (
-          Array.isArray(data.dupicate[0][getCourse[0]]) &&
-          data.dupicate[0][getCourse[0]] != null
-        ) {
-          for (let i = 0; i < data.dupicate[0][getCourse[0]].length; i++) {
-            for (let j = 0; j < data.dupicate[0][getCourse[0]].length; j++) {
-              if (
-                data.dupicate[0][getCourse[0]][i].course_code ==
-                  data.dupicate[0][getCourse[0]][j].course_code &&
-                i != j
-              ) {
-                validate = 1;
-                break;
-              }
+        let duplicateErr = [];
+        for (let i = 0; i < splitData.length; i++) {
+          for (let j = 0; j < splitData.length; j++) {
+            if (splitData[i] == splitData[j] && i != j) {
+              validate = 1;
+              duplicateErr.push(splitData[j]);
+              break;
             }
           }
         }
         if (validate != 1) {
+          const data = await compareSubject(course_N);
           saveData(data);
         } else {
-          console.log("eror");
+          Swal.fire({
+            title: "ไม่สามารถเทียบวิชาซ้ำได้",
+            text: `มีวิชาดังนี้ ${duplicateErr.map((item) => ` ${item}`)}`,
+            icon: "error",
+          });
         }
       } else {
         let validate = 0;
-        if (data.general[0] != null) {
+        let duplicateErr = [];
+        const getCourse = Object.keys(initialData?.dupicate[0]);
+        console.log(initialData);
+
+        if (initialData.general != "") {
           for (let i = 0; i < initialData.general.length; i++) {
-            if (
-              initialData.general[i].course_code == data.general[0].course_code
-            ) {
-              validate = 1;
-              break;
-            }
-          }
-        } else if (data.notCompare[0] != null) {
-          for (let i = 0; i < initialData.notCompare.length; i++) {
-            if (
-              initialData.notCompare[i].course_code ==
-              data.notCompare[0].course_code
-            ) {
-              validate = 1;
-              break;
-            }
-          }
-        } else if (
-          Array.isArray(data.dupicate[0][getCourse[0]]) &&
-          data.dupicate[0][getCourse[0]] != null
-        ) {
-          for (let i = 0; i < data.dupicate[0][getCourse[0]].length; i++) {
-            for (let j = 0; j < data.dupicate[0][getCourse[0]].length; j++) {
-              if (
-                data.dupicate[0][getCourse[0]][i].course_code ==
-                  data.dupicate[0][getCourse[0]][j].course_code &&
-                i != j
-              ) {
+            for (let j = 0; j < splitData.length; j++) {
+              if (initialData.general[i].course_code === splitData[j]) {
                 validate = 1;
+                duplicateErr.push(splitData[j]);
+                break;
+              }
+            }
+          }
+        } else if (initialData.dupicate[0][getCourse[0]] != "") {
+          if (initialData.dupicate.length === 1) {
+            Object.keys(initialData.dupicate[0]).map((convertCode) => {
+              for (
+                let i = 0;
+                i < initialData.dupicate[0][convertCode].length;
+                i++
+              ) {
+                for (let j = 0; j < splitData.length; j++) {
+                  if (
+                    initialData.dupicate[0][convertCode][i].course_code ===
+                    splitData[j]
+                  ) {
+                    validate = 1;
+                    duplicateErr.push(splitData[j]);
+                    break;
+                  }
+                }
+              }
+            });
+          } else {
+            console.log(initialData.dupicate.length);
+
+            for (let i = 0; i < initialData.dupicate.length; i++) {
+              Object.keys(initialData.dupicate[i]).map((convertCode) => {
+                console.log(initialData.dupicate[i][convertCode].length);
+                for (
+                  let j = 0;
+                  j < initialData.dupicate[i][convertCode].length;
+                  j++
+                ) {
+                  console.log(initialData.dupicate[i][convertCode][j]);
+                  for (let k = 0; k < splitData.length; k++) {
+                    if (
+                      splitData[k] ===
+                      initialData.dupicate[i][convertCode][j].course_code
+                    ) {
+                      validate = 1;
+                      duplicateErr.push(splitData[j]);
+                      break;
+                    }
+                  }
+                }
+              });
+            }
+          }
+        } else if (initialData.notCompare != "") {
+          console.log("NotCompare");
+          for (let i = 0; i < initialData.notCompare.length; i++) {
+            for (let j = 0; j < splitData.length; j++) {
+              console.log(initialData.notCompare[i].course_code);
+              if (initialData.notCompare[i].course_code === splitData[j]) {
+                validate = 1;
+                duplicateErr.push(splitData[j]);
                 break;
               }
             }
           }
         }
-        for (let i = 0; i < data.notCompare.length; i++) {
-          for (let j = 0; j < data.notCompare.length; j++) {
-            if (
-              data.notCompare[i].course_code ==
-                data.notCompare[j].course_code &&
-              i != j
-            ) {
-              validate = 1;
-              break;
-            }
-          }
-        }
         if (validate != 1) {
+          const data = await compareSubject(course_N);
           const mergedData = {
             general: initialData.general.concat(data.general),
-            duplicate: initialData.dupicate?.concat(data.dupicate),
+            dupicate: initialData.dupicate?.concat(data.dupicate),
             notCompare: initialData.notCompare?.concat(data.notCompare),
           };
           saveData(mergedData);
         } else {
-          console.log("eror");
+          Swal.fire({
+            title: "ไม่สามารถเทียบวิชาซ้ำได้",
+            text: `มีวิชาดังนี้ ${duplicateErr.map((item) => ` ${item}`)}`,
+            icon: "error",
+          });
         }
       }
     }
