@@ -7,7 +7,7 @@ import Condition from "./components/Condition";
 
 export default function Home() {
   const [changeState, setChangeState] = useState<boolean>(true);
-  const [compareDataInitial, setcompareDataInitial] = useState([]);
+  const [compareDataInitial, setcompareDataInitial] = useState<any>([]);
 
   const handleChangeState = (value: boolean) => {
     return setChangeState(value);

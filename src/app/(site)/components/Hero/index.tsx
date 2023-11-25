@@ -9,7 +9,6 @@ const index = ({ changeState, saveData, initialData }: any) => {
   const [formData, setFormData] = useState("");
   const handleSubmit = async () => {
     const splitData = formData.split(/[,\s]+/);
-    console.log(initialData);
 
     if (splitData[0] === "") {
       Swal.fire({
@@ -50,10 +49,8 @@ const index = ({ changeState, saveData, initialData }: any) => {
       } else {
         let validate = 0;
         let duplicateErr = [];
-        const getCourse = Object.keys(initialData?.dupicate[0]);
-        console.log(initialData);
 
-        if (initialData.general != "") {
+        if (initialData.general.length > 0) {
           for (let i = 0; i < initialData.general.length; i++) {
             for (let j = 0; j < splitData.length; j++) {
               if (initialData.general[i].course_code === splitData[j]) {
@@ -63,7 +60,10 @@ const index = ({ changeState, saveData, initialData }: any) => {
               }
             }
           }
-        } else if (initialData.dupicate[0][getCourse[0]] != "") {
+        }
+        if (initialData.dupicate[0]) {
+          console.log(initialData.dupicate.length);
+
           if (initialData.dupicate.length === 1) {
             Object.keys(initialData.dupicate[0]).map((convertCode) => {
               for (
@@ -84,8 +84,6 @@ const index = ({ changeState, saveData, initialData }: any) => {
               }
             });
           } else {
-            console.log(initialData.dupicate.length);
-
             for (let i = 0; i < initialData.dupicate.length; i++) {
               Object.keys(initialData.dupicate[i]).map((convertCode) => {
                 console.log(initialData.dupicate[i][convertCode].length);
@@ -109,11 +107,12 @@ const index = ({ changeState, saveData, initialData }: any) => {
               });
             }
           }
-        } else if (initialData.notCompare != "") {
-          console.log("NotCompare");
+        }
+        if (initialData.notCompare.length > 0) {
+          console.log("InitData");
+
           for (let i = 0; i < initialData.notCompare.length; i++) {
             for (let j = 0; j < splitData.length; j++) {
-              console.log(initialData.notCompare[i].course_code);
               if (initialData.notCompare[i].course_code === splitData[j]) {
                 validate = 1;
                 duplicateErr.push(splitData[j]);
@@ -122,7 +121,9 @@ const index = ({ changeState, saveData, initialData }: any) => {
             }
           }
         }
+
         if (validate != 1) {
+          console.log("success");
           const data = await compareSubject(course_N);
           const mergedData = {
             general: initialData.general.concat(data.general),
@@ -131,6 +132,7 @@ const index = ({ changeState, saveData, initialData }: any) => {
           };
           saveData(mergedData);
         } else {
+          console.log("failed");
           Swal.fire({
             title: "ไม่สามารถเทียบวิชาซ้ำได้",
             text: `มีวิชาดังนี้ ${duplicateErr.map((item) => ` ${item}`)}`,
